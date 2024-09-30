@@ -1,3 +1,5 @@
 **これは改造YUKIです。**
 <br>
-### github 
+### github
+githubpages,codespace
+<br>でデプロイできるように改造しています。
