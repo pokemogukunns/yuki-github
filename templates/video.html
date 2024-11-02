@@ -22,9 +22,28 @@
                     <hr>
 
     <script>
-        async function fetchVideoData(videoId) {
+       fetch(`https://inv.nadeko.net/api/v1/videos/${videoId}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // ここでデータを確認
+        const videoUrl = data.formatStreams[0]?.url; // 動画ストリームURL
+        const voiceUrl = data.adaptiveFormats[0]?.url; // 音声ストリームURL
+
+        // HTMLにデータを埋め込み
+        document.getElementById('videoTitle').textContent = data.title;
+        document.getElementById('channelIcon').src = data.channel.iconUrl;
+        document.getElementById('channelName').textContent = data.channel.name;
+        document.getElementById('videoPlayer').src = videoUrl;
+    })
+    .catch(error => console.error('データの取得に失敗しました:', error));
+    </script>
+        <!--<script>
+            async function fetchVideoData(videoId) {
             const url = `https://inv.nadeko.net/api/v1/videos/${videoId}`;
             const response = await fetch(url);
+
+
+
             
             if (!response.ok) {
                 const errorData = await response.json();
@@ -60,7 +79,8 @@
                 console.error('動画情報の取得に失敗しました:', error);
             }
         };
-    </script>
+       
+    </script>-->
 </body>
 </html>
 
