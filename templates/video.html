@@ -52,7 +52,7 @@
         }
 
         window.onload = async () => {
-            const videoId = window.location.hash.substring(1); // ハッシュからVideo IDを取得
+            const videoId = window.location.hash.substring(1); // 先頭の#を除去
             try {
                 const videoData = await fetchVideoData(videoId);
                 displayVideoData(videoData);
@@ -63,6 +63,66 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--<div id="player-container" class="h-box">
                 <video style="outline:none;width:100%;background-color:#000;" playsinline="" poster="{% if proxy == "True" %}/thumbnail?v={{ videoid }}{% else %}https://img.youtube.com/vi/{{ videoid }}/0.jpg{% endif
                     %}" id="player" class="on-video_player video-js player-style-invidious" controls=""
