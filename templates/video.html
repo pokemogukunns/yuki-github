@@ -22,20 +22,26 @@
                     <hr>
 
     <script>
-       fetch(`https://inv.nadeko.net/api/v1/videos/${videoId}`)
+       // videoIdを取得するコード（URLのハッシュから取得する例）
+const videoId = window.location.hash.substring(1); // #の後の部分を取得
+
+fetch(`https://inv.nadeko.net/api/v1/videos/${videoId}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data); // ここでデータを確認
-        const videoUrl = data.formatStreams[0]?.url; // 動画ストリームURL
-        const voiceUrl = data.adaptiveFormats[0]?.url; // 音声ストリームURL
+        console.log(data); // デバッグ用に取得したデータを表示
 
-        // HTMLにデータを埋め込み
+        // 動画URLと音声URLの取得
+        const videoUrl = data.formatStreams[0]?.url; // formatStreamsから動画ストリームURL
+        const voiceUrl = data.adaptiveFormats[0]?.url; // adaptiveFormatsから音声ストリームURL
+
+        // データをHTML要素に埋め込み
         document.getElementById('videoTitle').textContent = data.title;
-        document.getElementById('channelIcon').src = data.channel.iconUrl;
-        document.getElementById('channelName').textContent = data.channel.name;
-        document.getElementById('videoPlayer').src = videoUrl;
+        document.getElementById('channelIcon').src = data.author.avatarUrl; // チャンネルアイコン
+        document.getElementById('channelName').textContent = data.author.name; // チャンネル名
+        document.getElementById('videoPlayer').src = videoUrl; // 動画URLをビデオプレイヤーに設定
     })
     .catch(error => console.error('データの取得に失敗しました:', error));
+
     </script>
         <!--<script>
             async function fetchVideoData(videoId) {
